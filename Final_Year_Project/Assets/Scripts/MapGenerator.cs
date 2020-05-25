@@ -15,7 +15,14 @@ public class MapGenerator : MonoBehaviour
 
     public Material terrainMaterial;
 
-    [Range(0, 6)]
+    [Range(0, Mesh_Generator1.numSupportedChunkSizes - 1)]
+    public int chunckSizeIndex;
+
+    [Range(0, Mesh_Generator1.numSupportedFlastShadedChunkSizes - 1)]
+    public int flastshadedchunckSizeIndex;
+
+
+    [Range(0, Mesh_Generator1.numSupportedLODs - 1)]
     public int levelPreviewLOD;
 
     public bool autoUpdate;
@@ -47,11 +54,11 @@ public class MapGenerator : MonoBehaviour
         {
             if (terrainData.useFlatShading)
             {
-                return 95;
+                return Mesh_Generator1.supportedFlastShadedChunckSizes[flastshadedchunckSizeIndex]-1;
             }
             else
             {
-                return 239;
+                return Mesh_Generator1.supportedChunckSizes[chunckSizeIndex] -1;
             }
         }
     }
