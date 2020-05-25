@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+Final_Year_Project/[Ll]ibrary/
+Final_Year_Project/[Tt]emp/
+Final_Year_Project/[Oo]bj/
+Final_Year_Project/[Bb]uild/
+Final_Year_Project/[Bb]uilds/
+Final_Year_Project/[Ll]ogs/
+Final_Year_Project/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
