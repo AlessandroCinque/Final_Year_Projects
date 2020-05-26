@@ -52,7 +52,7 @@ public static class Mesh_Generator1
                 Vector2 percent = new Vector2((x-meshSimplificationIncrement) / (float)meshSize, (y - meshSimplificationIncrement) / (float)meshSize);
 
                 float height = heightMap[x, y];
-                Vector3 vertexPosition = new Vector3(topLeftX + percent.x* meshSizeUnsimplified * meshSettings.meshScale, height, topLeftZ - percent.y* meshSizeUnsimplified * meshSettings.meshScale);
+                Vector3 vertexPosition = new Vector3((topLeftX + percent.x* meshSizeUnsimplified) * meshSettings.meshScale, height, (topLeftZ - percent.y* meshSizeUnsimplified) * meshSettings.meshScale);
 
                 meshData.AddVertex(vertexPosition,percent,vertexIndex);
 
