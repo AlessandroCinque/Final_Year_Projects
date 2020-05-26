@@ -4,14 +4,9 @@ using UnityEngine;
 
 public static class Mesh_Generator1
 {
-    public const int numSupportedLODs = 5;
-    public const int numSupportedChunkSizes = 9;
-    public const int numSupportedFlastShadedChunkSizes = 3;
-    public static readonly int[] supportedChunckSizes = { 48, 72, 96, 120, 144, 168, 192, 216, 240 };
-    public static readonly int[] supportedFlastShadedChunckSizes = { 48, 72, 96 };
-    public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMultiplayer,AnimationCurve _heightCurve, int levelOfDetail,bool useFlatShading)
+
+    public static MeshData GenerateTerrainMesh(float [,] heightMap,MeshSettings meshSettings ,int levelOfDetail)
     {
-        AnimationCurve heightCurve = new AnimationCurve(_heightCurve.keys);
         int meshSimplificationIncrement = (levelOfDetail == 0) ? 1 : levelOfDetail * 2;
         int borderedSize = heightMap.GetLength(0);
         int meshSize = borderedSize - 2* meshSimplificationIncrement;
@@ -24,7 +19,7 @@ public static class Mesh_Generator1
        
         int verticesPerLine = (meshSize - 1)/ meshSimplificationIncrement +1;
 
-        MeshData meshData = new MeshData(verticesPerLine, useFlatShading);
+        MeshData meshData = new MeshData(verticesPerLine, meshSettings.useFlatShading);
 
         int[,] vertexIncidesMap = new int[borderedSize, borderedSize];
         int meshVertexIndex = 0;
@@ -56,8 +51,8 @@ public static class Mesh_Generator1
                 int vertexIndex = vertexIncidesMap[x, y];
                 Vector2 percent = new Vector2((x-meshSimplificationIncrement) / (float)meshSize, (y - meshSimplificationIncrement) / (float)meshSize);
 
-                float height = heightCurve.Evaluate(heightMap[x, y]) * heightMultiplayer;
-                Vector3 vertexPosition = new Vector3(topLeftX + percent.x* meshSizeUnsimplified, height, topLeftZ - percent.y* meshSizeUnsimplified);
+                float height = heightMap[x, y];
+                Vector3 vertexPosition = new Vector3(topLeftX + percent.x* meshSizeUnsimplified * meshSettings.meshScale, height, topLeftZ - percent.y* meshSizeUnsimplified * meshSettings.meshScale);
 
                 meshData.AddVertex(vertexPosition,percent,vertexIndex);
 

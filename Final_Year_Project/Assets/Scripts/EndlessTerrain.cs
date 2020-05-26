@@ -36,7 +36,7 @@ public class EndlessTerrain : MonoBehaviour
     }
     private void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/mapGenerator.terrainData.uniformScale;
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/mapGenerator.terrainData.meshScale;
         if (viewerPosition != viewerPositionOld)
         {
             foreach (TerrainChunck chucnk in visibleTerrainChuncks)
@@ -125,11 +125,11 @@ public class EndlessTerrain : MonoBehaviour
 
             meshRenderer.material = material;
 
-            meshObject.transform.position = positionV3 * mapGenerator.terrainData.uniformScale;
+            meshObject.transform.position = positionV3 * mapGenerator.terrainData.meshScale;
 
             meshObject.transform.parent = parent;
 
-            meshObject.transform.localScale = Vector3.one * mapGenerator.terrainData.uniformScale;
+            meshObject.transform.localScale = Vector3.one * mapGenerator.terrainData.meshScale;
             //
             SetVisible(false);
 

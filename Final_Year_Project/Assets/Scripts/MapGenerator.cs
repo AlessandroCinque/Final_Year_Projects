@@ -9,17 +9,13 @@ public class MapGenerator : MonoBehaviour
     public enum DrawMode {NoiseMap, Mesh,FalloffMap };
     public DrawMode drawMode;
 
-    public TerrainData terrainData;
+    public MeshSettings terrainData;
     public HeightMap_Settings noiseData;
     public TextureData textureData;
 
     public Material terrainMaterial;
 
-    [Range(0, Mesh_Generator1.numSupportedChunkSizes - 1)]
-    public int chunckSizeIndex;
-
-    [Range(0, Mesh_Generator1.numSupportedFlastShadedChunkSizes - 1)]
-    public int flastshadedchunckSizeIndex;
+  
 
 
     [Range(0, Mesh_Generator1.numSupportedLODs - 1)]
@@ -48,20 +44,7 @@ public class MapGenerator : MonoBehaviour
     {
         textureData.ApplyToMaterial(terrainMaterial);
     }
-    public int mapChunckSize
-    {
-        get
-        {
-            if (terrainData.useFlatShading)
-            {
-                return Mesh_Generator1.supportedFlastShadedChunckSizes[flastshadedchunckSizeIndex]-1;
-            }
-            else
-            {
-                return Mesh_Generator1.supportedChunckSizes[chunckSizeIndex] -1;
-            }
-        }
-    }
+ 
     public void DrawMapInEditor()
     {
         textureData.UpdateMeshHeight(terrainMaterial, terrainData.minHeight, terrainData.maxHeight);
