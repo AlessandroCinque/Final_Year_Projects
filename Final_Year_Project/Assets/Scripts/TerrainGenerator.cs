@@ -28,6 +28,8 @@ public class TerrainGenerator : MonoBehaviour
     List<TerrainChunck> visibleTerrainChuncks = new List<TerrainChunck>();
     private void Start()
     {
+        textureSettings.ApplyToMaterial(mapMaterial);
+        textureSettings.UpdateMeshHeight(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
 
         float maxViewDst = detailLeveles[detailLeveles.Length - 1].visibleDstThreshold;
         meshWorldSize = meshSettings.meshWorldSize;
