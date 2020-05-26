@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class HeightMap_Settings : UpdatableData
 {
-    public NoiseSettings noiseSettings
+    public NoiseSettings noiseSettings;
 
 
     public bool useFalloff;
