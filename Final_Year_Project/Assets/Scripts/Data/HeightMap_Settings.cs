@@ -30,15 +30,7 @@ public class HeightMap_Settings : UpdatableData
 #if UNITY_EDITOR
     protected override void OnValidate()
     {
-        if (lacunarity < 1)
-        {
-            lacunarity = 1;
-        }
-        if (octaves < 0)
-        {
-            octaves = 0;
-        }
-
+        noiseSettings.ValidateValues();
         //Just for make sure it gets call when also it gets called in UpdatableData
         base.OnValidate();
     }
