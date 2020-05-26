@@ -87,3 +87,17 @@ public static class Noise
         return noiseMap;
     }
 }
+[System.Serializable]
+public class NoiseSettings
+{
+    public Noise.NormalizeMode normalizeMode;
+    public float scale;
+
+    public int octaves;
+    [Range(0, 1)]
+    public float persistance;
+    public float lacunarity;
+
+    public int seed;
+    public Vector2 offset;
+}
