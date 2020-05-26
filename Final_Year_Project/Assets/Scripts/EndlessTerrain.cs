@@ -36,7 +36,7 @@ public class EndlessTerrain : MonoBehaviour
     }
     private void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/mapGenerator.terrainData.meshScale;
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/mapGenerator.meshSettings.meshScale;
         if (viewerPosition != viewerPositionOld)
         {
             foreach (TerrainChunck chucnk in visibleTerrainChuncks)
@@ -104,8 +104,8 @@ public class EndlessTerrain : MonoBehaviour
         LODMesh[] lodMeshes;
         int colliderLODIndex;
 
-        HeightMap mapData;
-        bool mapDataReceived;
+        HeightMap heightMap;
+        bool heightMapReceived;
         int previousLODIndex = -1;
 
         bool hasSetCollider;
@@ -125,11 +125,11 @@ public class EndlessTerrain : MonoBehaviour
 
             meshRenderer.material = material;
 
-            meshObject.transform.position = positionV3 * mapGenerator.terrainData.meshScale;
+            meshObject.transform.position = positionV3 * mapGenerator.meshSettings.meshScale;
 
             meshObject.transform.parent = parent;
 
-            meshObject.transform.localScale = Vector3.one * mapGenerator.terrainData.meshScale;
+            meshObject.transform.localScale = Vector3.one * mapGenerator.meshSettings.meshScale;
             //
             SetVisible(false);
 
@@ -144,21 +144,21 @@ public class EndlessTerrain : MonoBehaviour
                 }
             }
 
-            mapGenerator.RequestMapData(position,OnMapDataReceived);
+            mapGenerator.RequestHeightMap(position,OnHeightMapReceived);
         }
 
 
-        void OnMapDataReceived(HeightMap mapData)
+        void OnHeightMapReceived(HeightMap heightMap)
         {
-            this.mapData = mapData;
-            mapDataReceived = true;
+            this.heightMap = heightMap;
+            heightMapReceived = true;
 
             UpdateTerrainChunk();
         }
 
         public void UpdateTerrainChunk()
         {
-            if (mapDataReceived)
+            if (heightMapReceived)
             {
 
 
@@ -190,7 +190,7 @@ public class EndlessTerrain : MonoBehaviour
                         }
                         else if (!lodMesh.hasRequestedMesh)
                         {
-                            lodMesh.RequestMesh(mapData);
+                            lodMesh.RequestMesh(heightMap);
                         }
                     }
 
@@ -224,7 +224,7 @@ public class EndlessTerrain : MonoBehaviour
                 {
                     if (!lodMeshes[colliderLODIndex].hasRequestedMesh)
                     {
-                        lodMeshes[colliderLODIndex].RequestMesh(mapData);
+                        lodMeshes[colliderLODIndex].RequestMesh(heightMap);
                     }
                 }
 
@@ -266,10 +266,10 @@ public class EndlessTerrain : MonoBehaviour
             hasMesh = true;
             updateCallback();
         }
-        public void RequestMesh(HeightMap mapData)
+        public void RequestMesh(HeightMap heightMap)
         {
             hasRequestedMesh = true;
-            mapGenerator.RequestMeshData(mapData,lod, OnMeshDataReceived);
+            mapGenerator.RequestMeshData(heightMap,lod, OnMeshDataReceived);
         }
     }
     //Setting all the different areas a their level of detail, especially the range which they can be seen from!
