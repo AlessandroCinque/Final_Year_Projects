@@ -123,32 +123,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    HeightMap GenerateMapData(Vector2 centre)
-    {
-        float[,] noiseMap = Noise.GenerateNoiseMap(mapChunckSize + 2, mapChunckSize + 2, noiseData.seed, noiseData.noiseScale, noiseData.octaves, noiseData.persistance, noiseData.lacunarity, centre + noiseData.offset, noiseData.normalizeMode);
-        if (terrainData.useFalloff)
-        {
-            if (fallOffMap == null)
-            {
-                fallOffMap = FalloffGenerator.GenerateFalloffMap(mapChunckSize + 2);
-            }
-            for (int y = 0; y < mapChunckSize +2; y++)
-            {
-                for (int x = 0; x < mapChunckSize + 2; x++)
-                {
-                    if (terrainData.useFalloff)
-                    {
-                        noiseMap[x, y] = Mathf.Clamp01(noiseMap[x, y] - fallOffMap[x, y]);
-                    }
 
-                }
-            }
-          
-        }
-        
-        return new HeightMap(noiseMap);
-        
-    }
     private void OnValidate()
     {
         if (terrainData!=null)
