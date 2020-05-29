@@ -65,7 +65,7 @@ using UnityEngine;
                 lodMeshes[i].updateCallback += UpdateTerrainChunk;
                 if (i == colliderLODIndex)
                 {
-                    lodMeshes[i].updateCallback += UpdateCollsionMesh;
+                    lodMeshes[i].updateCallback += UpdateCollisionMesh;
                 }
             }
 
@@ -142,7 +142,7 @@ using UnityEngine;
             }
 
         }
-        public void UpdateCollsionMesh()
+        public void UpdateCollisionMesh()
         {
             if (!hasSetCollider)
             {

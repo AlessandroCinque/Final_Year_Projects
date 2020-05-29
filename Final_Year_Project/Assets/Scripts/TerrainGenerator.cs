@@ -43,7 +43,7 @@ public class TerrainGenerator : MonoBehaviour
         {
             foreach (TerrainChunck chucnk in visibleTerrainChuncks)
             {
-                chucnk.UpdateCollsionMesh();
+                chucnk.UpdateCollisionMesh();
             }
            
         }
